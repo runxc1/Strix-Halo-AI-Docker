@@ -2,6 +2,9 @@
 
 `llama.cpp` server running GLM-4.7-Flash model with Vulkan GPU acceleration.
 
+> [!NOTE]
+> Anecdotally, the experience using `opencode` with this setup on a Framework Mainboard (Ryzen AI Max 395+ 128gb) feels almost as fast as Claude Code. Definitely useable day-to-day! 
+
 ## 🏌️ Quick Start
 
 ```bash
