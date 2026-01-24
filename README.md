@@ -30,7 +30,9 @@ Download model at [Huggingface](https://huggingface.co/unsloth/GLM-4.7-Flash-GGU
 In the "Admin Panel" under "Connections", add a new "OpenAI" style connection
 like this:
 
-![openweb-ui_config](./.github/openai-connection.png)
+![openweb-ui_config](.github/openwebui-config.png)
+
+> The API token can be anything
 
 ### opencode
 
