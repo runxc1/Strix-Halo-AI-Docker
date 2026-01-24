@@ -2,12 +2,29 @@ version: "3.8"
 
 services:
   llama-cpp:
-    image: ghcr.io/ggml-org/llama.cpp:full
+    image: ghcr.io/ggml-org/llama.cpp:full-vulkan
     container_name: llama-cpp-server
     ports:
       - "8080:8080"
     volumes:
       - ./models:/models:Z
+
+    # GPU device access - required for ROCm
+    devices:
+      - /dev/kfd:/dev/kfd
+      - /dev/dri:/dev/dri
+
+    # Security options for GPU access
+    security_opt:
+      - seccomp:unconfined
+
+    # Group access for GPU
+    group_add:
+      - video
+
+    environment:
+      - HSA_OVERRIDE_GFX_VERSION=${HSA_OVERRIDE_GFX_VERSION:-11.5.1}
+
     command:
       - --server
       - --host
@@ -17,12 +34,14 @@ services:
       - --model
       - /models/GLM-4.7-Flash-UD-Q8_K_XL.gguf
       - --jinja
+      - --device
+      - "Vulkan0"
       - --ctx-size 
-      - 202752
+      - "202752"
       - --threads
-      - -1
+      - "-1"
       - --fit
-      - on
+      - "on"
       - --temp
       - "0.2"
       - --top-p
