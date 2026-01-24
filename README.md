@@ -17,12 +17,6 @@ Server runs on `http://localhost:8080`
 
 ## 🛠️ Configuration
 
-- **Model**: GLM-4.7-Flash-UD-Q8_K_XL.gguf
-- **Context Size**: 202752 tokens
-- **Port**: 8080
-- **GPU**: Vulkan0 (ROCm)
-- **Idle Sleep**: 300 seconds
-
 Download model at [Huggingface](https://huggingface.co/unsloth/GLM-4.7-Flash-GGUF/blob/main/GLM-4.7-Flash-UD-Q8_K_XL.gguf) and put it in the `models/` directory.
 
 ### Open Web-UI
