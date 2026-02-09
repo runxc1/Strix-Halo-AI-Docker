@@ -1,6 +1,6 @@
-# GLM-4.7-Flash ROCm OpenAI Compatible Server
+# Qwen3-Coder-Next ROCm OpenAI Compatible Server
 
-`llama.cpp` server running GLM-4.7-Flash model with Vulkan GPU acceleration.
+`llama.cpp` server running Qwen3-Coder-Next model with Vulkan GPU acceleration.
 
 > [!NOTE]
 > Anecdotally, the experience using `opencode` with this setup on a Framework Mainboard (Ryzen AI Max 395+ 128gb) feels almost as fast as Claude Code. Definitely useable day-to-day! 
@@ -8,7 +8,7 @@
 ## 🏌️ Quick Start
 
 ```bash
-docker-compose up -d
+docker compose up -d
 ```
 
 Server runs on `http://localhost:8080`
@@ -20,7 +20,27 @@ Server runs on `http://localhost:8080`
 
 ## 🛠️ Configuration
 
-Download model at [Huggingface](https://huggingface.co/unsloth/GLM-4.7-Flash-GGUF/blob/main/GLM-4.7-Flash-UD-Q8_K_XL.gguf) and put it in the `models/` directory.
+### Download Model
+
+Download the [unsloth/Qwen3-Coder-Next-GGUF](https://huggingface.co/unsloth/Qwen3-Coder-Next-GGUF) model from Hugging Face.
+
+**Option 1: Use the setup script** (recommended):
+```bash
+./setup.sh
+```
+
+**Option 2: Manual download**:
+```bash
+https://unsloth.ai/docs/models/qwen3-coder-next
+
+pip install -U huggingface_hub
+
+hf download unsloth/Qwen3-Coder-Next-GGUF \
+    --local-dir unsloth/Qwen3-Coder-Next-GGUF \
+    --include "*UD-Q4_K_XL*"
+```
+
+The model (~46GB) will be downloaded to `./unsloth/Qwen3-Coder-Next-GGUF/`.
 
 ### Open Web-UI
 
@@ -44,12 +64,12 @@ In opencode, you can add the provider and model to your
       "npm": "@ai-sdk/openai-compatible",
       "name": "llm.puff.lan",
       "options": {
-        "baseURL": "http://10.0.3.23:8080/v1",
+        "baseURL": "http://mortgage-lifter2:8080/v1",
         "includeUsage": true
       },
       "models": {
-        "GLM-4.7-Flash-UD-Q8_K_XL": {
-          "name": "GLM-4.7 Flash",
+        "Qwen3-Coder-Next-UD-Q4_K_XL": {
+          "name": "Qwen3 Coder Next",
           "tool_call": true,
           "reasoning": true,
           "options": {
@@ -61,7 +81,7 @@ In opencode, you can add the provider and model to your
       }
     }
   },
-  "model": "GLM-4.7-Flash-UD-Q8_K_XL",
+  "model": "Qwen3-Coder-Next-UD-Q4_K_XL",
   "autoupdate": true,
 }
 ```
